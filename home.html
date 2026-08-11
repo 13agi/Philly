@@ -15,35 +15,6 @@
 <style>
 
 /* =========================================================
-   Philly
-   COMMON MOBILE UI
-   ========================================================= */
-
-:root {
-
-    --red: #E81828;
-    --red-dark: #B90F1D;
-    --red-light: #FF3040;
-
-    --navy-950: #040D1D;
-    --navy-900: #07152F;
-    --navy-850: #091A37;
-    --navy-800: #0B1F40;
-
-    --white: #FFFFFF;
-    --muted: #8E9DB5;
-
-    --line: rgba(255,255,255,0.075);
-
-    --header-height: 72px;
-    --nav-height: 76px;
-
-    --safe-top: env(safe-area-inset-top);
-    --safe-bottom: env(safe-area-inset-bottom);
-}
-
-
-/* =========================================================
    RESET
    ========================================================= */
 
@@ -51,40 +22,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
     -webkit-tap-highlight-color: transparent;
 }
 
-html {
+html,
+body {
     width: 100%;
     min-height: 100%;
-
-    background: var(--navy-950);
-
-    overscroll-behavior-x: none;
 }
 
 body {
-
-    width: 100%;
-    min-height: 100dvh;
-
-    margin: 0;
-
-    background:
-        radial-gradient(
-            100% 45% at 100% 0%,
-            rgba(232,24,40,0.12),
-            transparent 60%
-        ),
-        linear-gradient(
-            180deg,
-            var(--navy-900) 0%,
-            var(--navy-850) 50%,
-            var(--navy-950) 100%
-        );
-
-    color: var(--white);
+    background: #07152F;
+    color: #FFFFFF;
 
     font-family:
         -apple-system,
@@ -100,15 +49,51 @@ body {
 
 
 /* =========================================================
+   VARIABLES
+   ========================================================= */
+
+:root {
+
+    --red: #E81828;
+    --red-dark: #B90F1D;
+    --red-light: #FF3040;
+
+    --navy: #07152F;
+    --navy-dark: #040D1D;
+    --navy-card: #0B1F40;
+    --navy-light: #10284E;
+
+    --white: #FFFFFF;
+    --muted: #8E9DB5;
+
+    --header-height: 72px;
+    --bottom-height: 76px;
+
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+}
+
+
+/* =========================================================
    APP
    ========================================================= */
 
 .app {
-
-    position: relative;
-
     width: 100%;
     min-height: 100dvh;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(232,24,40,0.13),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #07152F 0%,
+            #081936 55%,
+            #040D1D 100%
+        );
 }
 
 
@@ -116,7 +101,7 @@ body {
    HEADER
    ========================================================= */
 
-.site-header {
+.header {
 
     position: fixed;
 
@@ -141,48 +126,38 @@ body {
             125deg,
             #E81828 0%,
             #D91627 48%,
-            #C31121 100%
+            #B90F1D 100%
         );
 
     box-shadow:
-        0 8px 26px rgba(0,0,0,0.28);
+        0 8px 26px rgba(0,0,0,0.3);
 }
 
 
-/* ---------------------------------------------------------
-   Header highlight
-   --------------------------------------------------------- */
+/* 赤の光 */
 
-.site-header::before {
+.header::before {
 
     content: "";
 
     position: absolute;
 
-    top: -35%;
-    left: -20%;
+    width: 170px;
+    height: 170px;
 
-    width: 80%;
-    height: 170%;
+    top: -110px;
+    left: -55px;
+
+    border-radius: 50%;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.10),
-            transparent 52%
-        );
-
-    transform: skewX(-18deg);
-
-    pointer-events: none;
+        rgba(255,255,255,0.10);
 }
 
 
-/* ---------------------------------------------------------
-   Header navy layer
-   --------------------------------------------------------- */
+/* ネイビー斜線 */
 
-.site-header::after {
+.header::after {
 
     content: "";
 
@@ -191,24 +166,22 @@ body {
     top: 0;
     right: 0;
 
-    width: 42%;
+    width: 45%;
     height: 100%;
 
     background:
         linear-gradient(
             135deg,
             transparent 0%,
-            transparent 47%,
-            var(--navy-900) 48%,
-            var(--navy-900) 100%
+            transparent 48%,
+            #07152F 49%,
+            #07152F 100%
         );
-
-    pointer-events: none;
 }
 
 
 /* =========================================================
-   HEADER INNER
+   HEADER MARK
    ========================================================= */
 
 .header-inner {
@@ -227,32 +200,28 @@ body {
 }
 
 
-/* =========================================================
-   HEADER MARK
-   ========================================================= */
-
-.header-emblem {
+.header-mark {
 
     position: relative;
 
     width: 42px;
     height: 42px;
 
-    border-radius: 50%;
-
     border:
         2px solid
-        rgba(255,255,255,0.88);
+        rgba(255,255,255,0.9);
 
-    box-shadow:
-        0 0 0 5px rgba(255,255,255,0.055),
-        0 7px 20px rgba(0,0,0,0.18);
+    border-radius: 50%;
 
     transform: rotate(-8deg);
+
+    box-shadow:
+        0 0 0 5px rgba(255,255,255,0.06),
+        0 6px 18px rgba(0,0,0,0.2);
 }
 
 
-.header-emblem::before {
+.header-mark::before {
 
     content: "";
 
@@ -262,15 +231,15 @@ body {
 
     border-radius: 50%;
 
-    background: var(--navy-900);
+    background: #07152F;
 
     border:
         1px solid
-        rgba(255,255,255,0.16);
+        rgba(255,255,255,0.15);
 }
 
 
-.header-emblem::after {
+.header-mark::after {
 
     content: "";
 
@@ -284,7 +253,7 @@ body {
 
     border-radius: 99px;
 
-    background: var(--red);
+    background: #E81828;
 
     transform: rotate(45deg);
 }
@@ -297,7 +266,6 @@ body {
 main {
 
     width: 100%;
-    min-height: 100dvh;
 
     padding-top:
         calc(
@@ -307,38 +275,460 @@ main {
 
     padding-bottom:
         calc(
-            var(--nav-height)
+            var(--bottom-height)
             + var(--safe-bottom)
+            + 20px
         );
 }
 
 
 /* =========================================================
-   CONTENT
+   HOME HERO
    ========================================================= */
 
-/*
-   HOMEページのコンテンツはここから追加する。
+.home-hero {
 
-   現在はUIのみのため空。
-*/
+    position: relative;
+
+    padding:
+        30px
+        20px
+        20px;
+
+    overflow: hidden;
+}
 
 
-.home-content {
+.hero-line {
 
-    width: 100%;
-    min-height: calc(
-        100dvh
-        - var(--header-height)
-        - var(--nav-height)
-        - var(--safe-top)
-        - var(--safe-bottom)
-    );
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+
+    color: #E81828;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: .18em;
+}
+
+
+.hero-line::before {
+
+    content: "";
+
+    width: 20px;
+    height: 2px;
+
+    border-radius: 99px;
+
+    background: #E81828;
+}
+
+
+.home-title {
+
+    font-size: 36px;
+
+    line-height: 1.02;
+
+    font-weight: 900;
+
+    letter-spacing: -0.055em;
+}
+
+
+.home-description {
+
+    margin-top: 11px;
+
+    color: #8E9DB5;
+
+    font-size: 13px;
+
+    line-height: 1.6;
 }
 
 
 /* =========================================================
-   BOTTOM NAVIGATION
+   MAIN GAME CARD
+   ========================================================= */
+
+.game-card {
+
+    position: relative;
+
+    margin:
+        0
+        16px
+        14px;
+
+    padding: 20px;
+
+    min-height: 215px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10284E 0%,
+            #0B1F40 52%,
+            #07152F 100%
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,0.25);
+}
+
+
+/* 赤い円 */
+
+.game-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    top: -95px;
+    right: -75px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(232,24,40,0.30),
+            transparent 70%
+        );
+}
+
+
+/* 斜めアクセント */
+
+.game-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: -70px;
+    bottom: 15px;
+
+    width: 220px;
+    height: 3px;
+
+    background:
+        rgba(232,24,40,0.35);
+
+    transform: rotate(-28deg);
+}
+
+
+/* =========================================================
+   GAME CARD CONTENT
+   ========================================================= */
+
+.game-card-content {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.game-label {
+
+    color: #8E9DB5;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: .17em;
+}
+
+
+.game-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 13px;
+
+    padding:
+        6px
+        9px;
+
+    border-radius: 99px;
+
+    background:
+        rgba(232,24,40,0.12);
+
+    color: #FF3040;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: .08em;
+}
+
+
+.game-status-dot {
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #E81828;
+
+    box-shadow:
+        0 0 8px
+        rgba(232,24,40,0.7);
+}
+
+
+.game-teams {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+
+.team {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.team-name {
+
+    font-size: 18px;
+
+    font-weight: 850;
+
+    letter-spacing: -0.03em;
+}
+
+
+.team-label {
+
+    color: #71809A;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .1em;
+}
+
+
+.game-vs {
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #8E9DB5;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    font-size: 10px;
+
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   QUICK MENU
+   ========================================================= */
+
+.section {
+
+    padding:
+        4px
+        16px
+        0;
+}
+
+
+.section-header {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        8px
+        4px
+        12px;
+}
+
+
+.section-title {
+
+    font-size: 15px;
+
+    font-weight: 850;
+
+    letter-spacing: -0.02em;
+}
+
+
+.section-line {
+
+    width: 25px;
+    height: 3px;
+
+    border-radius: 99px;
+
+    background: #E81828;
+
+    box-shadow:
+        0 0 9px
+        rgba(232,24,40,0.45);
+}
+
+
+.quick-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 10px;
+}
+
+
+.quick-card {
+
+    position: relative;
+
+    min-height: 115px;
+
+    padding: 16px;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.065),
+            rgba(255,255,255,0.025)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,0.075);
+
+    transition:
+        transform .15s ease;
+}
+
+
+.quick-card:active {
+
+    transform: scale(.97);
+}
+
+
+.quick-icon {
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: #E81828;
+
+    background:
+        rgba(232,24,40,0.10);
+}
+
+
+.quick-icon svg {
+
+    width: 18px;
+    height: 18px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+.quick-title {
+
+    margin-top: 13px;
+
+    font-size: 12px;
+
+    font-weight: 850;
+}
+
+
+.quick-text {
+
+    margin-top: 4px;
+
+    color: #63738D;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
    ========================================================= */
 
 .bottom-nav {
@@ -351,45 +741,40 @@ main {
 
     height:
         calc(
-            var(--nav-height)
+            var(--bottom-height)
             + var(--safe-bottom)
         );
 
-    padding-bottom: var(--safe-bottom);
+    padding-bottom:
+        var(--safe-bottom);
 
     z-index: 2000;
 
     background:
-        rgba(4,13,29,0.95);
+        rgba(4,13,29,0.96);
 
     border-top:
         1px solid
-        var(--line);
+        rgba(255,255,255,0.075);
 
     box-shadow:
         0 -10px 30px
-        rgba(0,0,0,0.30);
+        rgba(0,0,0,0.3);
 
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
 }
 
 
-/* =========================================================
-   NAV INNER
-   ========================================================= */
-
 .bottom-nav-inner {
 
     width: 100%;
-    height: var(--nav-height);
+    height: var(--bottom-height);
 
     display: grid;
 
     grid-template-columns:
-        repeat(5, 1fr);
-
-    align-items: stretch;
+        repeat(5,1fr);
 }
 
 
@@ -409,8 +794,6 @@ main {
     justify-content: center;
 
     gap: 5px;
-
-    min-width: 0;
 
     color: #71809A;
 
@@ -445,28 +828,18 @@ main {
 
     stroke-linecap: round;
     stroke-linejoin: round;
-
-    transition:
-        transform .18s ease,
-        filter .18s ease;
 }
 
-
-/* =========================================================
-   NAV LABEL
-   ========================================================= */
 
 .nav-label {
 
     font-size: 8px;
 
-    line-height: 1;
-
     font-weight: 850;
 
     letter-spacing: .065em;
 
-    white-space: nowrap;
+    line-height: 1;
 }
 
 
@@ -476,19 +849,20 @@ main {
 
 .nav-item.active {
 
-    color: var(--red);
+    color: #E81828;
 }
 
 
 .nav-item.active .nav-icon {
 
-    transform: translateY(-1px);
-
     filter:
         drop-shadow(
             0 0 7px
-            rgba(232,24,40,0.48)
+            rgba(232,24,40,.5)
         );
+
+    transform:
+        translateY(-1px);
 }
 
 
@@ -509,23 +883,13 @@ main {
 
     border-radius: 99px;
 
-    background: var(--red);
-
-    box-shadow:
-        0 0 10px
-        rgba(232,24,40,0.55);
+    background: #E81828;
 }
 
 
 /* =========================================================
-   HOME
+   HOME BUTTON
    ========================================================= */
-
-.nav-home {
-
-    justify-content: center;
-}
-
 
 .nav-home .home-circle {
 
@@ -543,25 +907,22 @@ main {
 
     border-radius: 50%;
 
-    color: white;
+    color: #FFFFFF;
 
     background:
         linear-gradient(
             145deg,
-            var(--red-light),
-            var(--red-dark)
+            #FF3040,
+            #B90F1D
         );
 
     border:
         3px solid
-        var(--navy-900);
+        #07152F;
 
     box-shadow:
-        0 5px 18px
-        rgba(232,24,40,0.34),
-
-        0 0 0 1px
-        rgba(232,24,40,0.20);
+        0 6px 20px
+        rgba(232,24,40,.4);
 }
 
 
@@ -577,7 +938,7 @@ main {
 
     border:
         1px solid
-        rgba(232,24,40,0.22);
+        rgba(232,24,40,.25);
 }
 
 
@@ -592,7 +953,7 @@ main {
 
 .nav-home.active {
 
-    color: white;
+    color: #FFFFFF;
 }
 
 
@@ -602,19 +963,8 @@ main {
 }
 
 
-.nav-home.active .home-circle {
-
-    box-shadow:
-        0 0 0 4px
-        rgba(232,24,40,0.10),
-
-        0 7px 22px
-        rgba(232,24,40,0.46);
-}
-
-
 /* =========================================================
-   SMALL iPHONE
+   SMALL DEVICES
    ========================================================= */
 
 @media (max-width: 360px) {
@@ -622,18 +972,23 @@ main {
     :root {
 
         --header-height: 68px;
-        --nav-height: 72px;
+        --bottom-height: 72px;
     }
 
-    .nav-label {
+    .home-title {
 
-        font-size: 7.5px;
+        font-size: 32px;
     }
 
     .nav-icon {
 
         width: 20px;
         height: 20px;
+    }
+
+    .nav-label {
+
+        font-size: 7.5px;
     }
 
     .nav-home .home-circle {
@@ -650,9 +1005,7 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
 
-    *,
-    *::before,
-    *::after {
+    * {
 
         transition: none !important;
     }
@@ -671,12 +1024,12 @@ main {
          HEADER
          ====================================================== -->
 
-    <header class="site-header">
+    <header class="header">
 
         <div class="header-inner">
 
             <div
-                class="header-emblem"
+                class="header-mark"
                 aria-hidden="true"
             ></div>
 
@@ -691,15 +1044,262 @@ main {
 
     <main>
 
-        <div class="home-content">
-            <!-- HOME CONTENT -->
-        </div>
+
+        <!-- HERO -->
+
+        <section class="home-hero">
+
+            <div class="hero-line">
+                PHILLIES BASEBALL
+            </div>
+
+            <h1 class="home-title">
+                Welcome to<br>
+                Philly.
+            </h1>
+
+            <p class="home-description">
+                Your Phillies, all in one place.
+            </p>
+
+        </section>
+
+
+        <!-- MAIN GAME -->
+
+        <section class="game-card">
+
+            <div class="game-card-content">
+
+                <div class="game-label">
+                    NEXT GAME
+                </div>
+
+                <div class="game-status">
+
+                    <span class="game-status-dot"></span>
+
+                    UPCOMING
+
+                </div>
+
+                <div class="game-teams">
+
+                    <div class="team">
+
+                        <div class="team-label">
+                            HOME
+                        </div>
+
+                        <div class="team-name">
+                            PHI
+                        </div>
+
+                    </div>
+
+
+                    <div class="game-vs">
+                        VS
+                    </div>
+
+
+                    <div class="team">
+
+                        <div class="team-label">
+                            AWAY
+                        </div>
+
+                        <div class="team-name">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- QUICK ACCESS -->
+
+        <section class="section">
+
+            <div class="section-header">
+
+                <h2 class="section-title">
+                    Quick Access
+                </h2>
+
+                <span class="section-line"></span>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+
+                <!-- SCHEDULE -->
+
+                <a
+                    href="schedule.html"
+                    class="quick-card"
+                >
+
+                    <div class="quick-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="16"
+                                rx="3"
+                            />
+
+                            <path d="M7 3v4"/>
+                            <path d="M17 3v4"/>
+                            <path d="M3 10h18"/>
+
+                            <path d="M8 14h.01"/>
+                            <path d="M12 14h.01"/>
+                            <path d="M16 14h.01"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div class="quick-title">
+                        Schedule
+                    </div>
+
+                    <div class="quick-text">
+                        試合日程
+                    </div>
+
+                </a>
+
+
+                <!-- SCORE -->
+
+                <a
+                    href="score.html"
+                    class="quick-card"
+                >
+
+                    <div class="quick-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
+
+                            <path d="M7 9h4"/>
+                            <path d="M13 9h4"/>
+
+                            <path d="M7 13h2"/>
+                            <path d="M11 13h2"/>
+                            <path d="M15 13h2"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div class="quick-title">
+                        Score
+                    </div>
+
+                    <div class="quick-text">
+                        試合速報・結果
+                    </div>
+
+                </a>
+
+
+                <!-- PLAYER -->
+
+                <a
+                    href="player.html"
+                    class="quick-card"
+                >
+
+                    <div class="quick-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <circle
+                                cx="12"
+                                cy="8"
+                                r="3.5"
+                            />
+
+                            <path
+                                d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <div class="quick-title">
+                        Player
+                    </div>
+
+                    <div class="quick-text">
+                        選手情報
+                    </div>
+
+                </a>
+
+
+                <!-- STATS -->
+
+                <a
+                    href="stats.html"
+                    class="quick-card"
+                >
+
+                    <div class="quick-icon">
+
+                        <svg viewBox="0 0 24 24">
+
+                            <path d="M4 20V10"/>
+                            <path d="M10 20V4"/>
+                            <path d="M16 20v-7"/>
+                            <path d="M22 20V7"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div class="quick-title">
+                        Stats
+                    </div>
+
+                    <div class="quick-text">
+                        チーム・選手成績
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
 
     </main>
 
 
     <!-- =====================================================
-         BOTTOM NAVIGATION
+         BOTTOM NAV
          ====================================================== -->
 
     <nav
@@ -713,14 +1313,13 @@ main {
             <!-- SCHEDULE -->
 
             <a
-                class="nav-item"
                 href="schedule.html"
+                class="nav-item"
             >
 
                 <svg
                     class="nav-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                 >
 
                     <rect
@@ -731,18 +1330,17 @@ main {
                         rx="3"
                     />
 
-                    <path d="M7 3v4" />
-                    <path d="M17 3v4" />
+                    <path d="M7 3v4"/>
+                    <path d="M17 3v4"/>
+                    <path d="M3 10h18"/>
 
-                    <path d="M3 10h18" />
+                    <path d="M8 14h.01"/>
+                    <path d="M12 14h.01"/>
+                    <path d="M16 14h.01"/>
 
-                    <path d="M8 14h.01" />
-                    <path d="M12 14h.01" />
-                    <path d="M16 14h.01" />
-
-                    <path d="M8 18h.01" />
-                    <path d="M12 18h.01" />
-                    <path d="M16 18h.01" />
+                    <path d="M8 18h.01"/>
+                    <path d="M12 18h.01"/>
+                    <path d="M16 18h.01"/>
 
                 </svg>
 
@@ -756,14 +1354,13 @@ main {
             <!-- SCORE -->
 
             <a
-                class="nav-item"
                 href="score.html"
+                class="nav-item"
             >
 
                 <svg
                     class="nav-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                 >
 
                     <rect
@@ -774,14 +1371,14 @@ main {
                         rx="2"
                     />
 
-                    <path d="M7 9h4" />
-                    <path d="M13 9h4" />
+                    <path d="M7 9h4"/>
+                    <path d="M13 9h4"/>
 
-                    <path d="M7 13h2" />
-                    <path d="M11 13h2" />
-                    <path d="M15 13h2" />
+                    <path d="M7 13h2"/>
+                    <path d="M11 13h2"/>
+                    <path d="M15 13h2"/>
 
-                    <path d="M7 16h10" />
+                    <path d="M7 16h10"/>
 
                 </svg>
 
@@ -795,8 +1392,8 @@ main {
             <!-- HOME -->
 
             <a
-                class="nav-item nav-home active"
                 href="home.html"
+                class="nav-item nav-home active"
                 aria-current="page"
             >
 
@@ -805,14 +1402,17 @@ main {
                     <svg
                         class="nav-icon"
                         viewBox="0 0 24 24"
-                        aria-hidden="true"
                     >
 
-                        <path d="M3 11.5 12 4l9 7.5" />
+                        <path d="M3 11.5 12 4l9 7.5"/>
 
-                        <path d="M5 10.5V20h14v-9.5" />
+                        <path
+                            d="M5 10.5V20h14v-9.5"
+                        />
 
-                        <path d="M9 20v-5h6v5" />
+                        <path
+                            d="M9 20v-5h6v5"
+                        />
 
                     </svg>
 
@@ -828,14 +1428,13 @@ main {
             <!-- PLAYER -->
 
             <a
-                class="nav-item"
                 href="player.html"
+                class="nav-item"
             >
 
                 <svg
                     class="nav-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                 >
 
                     <circle
@@ -860,20 +1459,19 @@ main {
             <!-- STATS -->
 
             <a
-                class="nav-item"
                 href="stats.html"
+                class="nav-item"
             >
 
                 <svg
                     class="nav-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
                 >
 
-                    <path d="M4 20V10" />
-                    <path d="M10 20V4" />
-                    <path d="M16 20v-7" />
-                    <path d="M22 20V7" />
+                    <path d="M4 20V10"/>
+                    <path d="M10 20V4"/>
+                    <path d="M16 20v-7"/>
+                    <path d="M22 20V7"/>
 
                 </svg>
 
