@@ -2,61 +2,86 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+
 <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
-<meta name="theme-color" content="#07152f">
+
+<meta name="theme-color" content="#07152F">
+
 <title>Philly</title>
 
 <style>
+
 /* =========================================================
    Philly
-   Mobile UI V1
+   COMMON MOBILE UI
    ========================================================= */
 
 :root {
-    --phillies-red: #e81828;
-    --phillies-red-dark: #b90f1d;
-    --navy: #07152f;
-    --navy-2: #0b1d3d;
-    --navy-3: #10264c;
-    --white: #ffffff;
-    --text-soft: #aebbd0;
-    --border: rgba(255,255,255,0.08);
 
-    --header-height: 74px;
-    --bottom-height: 76px;
+    --red: #E81828;
+    --red-dark: #B90F1D;
+    --red-light: #FF3040;
+
+    --navy-950: #040D1D;
+    --navy-900: #07152F;
+    --navy-850: #091A37;
+    --navy-800: #0B1F40;
+
+    --white: #FFFFFF;
+    --muted: #8E9DB5;
+
+    --line: rgba(255,255,255,0.075);
+
+    --header-height: 72px;
+    --nav-height: 76px;
+
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
 }
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
     -webkit-tap-highlight-color: transparent;
 }
 
 html {
     width: 100%;
     min-height: 100%;
-    background: var(--navy);
+
+    background: var(--navy-950);
+
+    overscroll-behavior-x: none;
 }
 
 body {
-    margin: 0;
+
     width: 100%;
-    min-height: 100vh;
     min-height: 100dvh;
+
+    margin: 0;
 
     background:
         radial-gradient(
-            circle at 85% 0%,
-            rgba(232,24,40,0.10),
-            transparent 32%
+            100% 45% at 100% 0%,
+            rgba(232,24,40,0.12),
+            transparent 60%
         ),
         linear-gradient(
             180deg,
-            #07152f 0%,
-            #081936 45%,
-            #061329 100%
+            var(--navy-900) 0%,
+            var(--navy-850) 50%,
+            var(--navy-950) 100%
         );
 
     color: var(--white);
@@ -68,6 +93,8 @@ body {
         Arial,
         sans-serif;
 
+    -webkit-font-smoothing: antialiased;
+
     overflow-x: hidden;
 }
 
@@ -77,9 +104,11 @@ body {
    ========================================================= */
 
 .app {
+
+    position: relative;
+
     width: 100%;
     min-height: 100dvh;
-    position: relative;
 }
 
 
@@ -87,18 +116,21 @@ body {
    HEADER
    ========================================================= */
 
-.top-header {
+.site-header {
+
     position: fixed;
+
     top: 0;
     left: 0;
     right: 0;
 
-    height: calc(
-        var(--header-height) +
-        env(safe-area-inset-top)
-    );
+    height:
+        calc(
+            var(--header-height)
+            + var(--safe-top)
+        );
 
-    padding-top: env(safe-area-inset-top);
+    padding-top: var(--safe-top);
 
     z-index: 1000;
 
@@ -106,79 +138,88 @@ body {
 
     background:
         linear-gradient(
-            135deg,
-            #e81828 0%,
-            #d91627 48%,
-            #b80f1d 100%
+            125deg,
+            #E81828 0%,
+            #D91627 48%,
+            #C31121 100%
         );
 
     box-shadow:
-        0 6px 22px rgba(0,0,0,0.28);
+        0 8px 26px rgba(0,0,0,0.28);
 }
 
 
-/*
-    ネイビーの斜めレイヤー
-*/
+/* ---------------------------------------------------------
+   Header highlight
+   --------------------------------------------------------- */
 
-.top-header::before {
+.site-header::before {
+
     content: "";
+
+    position: absolute;
+
+    top: -35%;
+    left: -20%;
+
+    width: 80%;
+    height: 170%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.10),
+            transparent 52%
+        );
+
+    transform: skewX(-18deg);
+
+    pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   Header navy layer
+   --------------------------------------------------------- */
+
+.site-header::after {
+
+    content: "";
+
     position: absolute;
 
     top: 0;
-    right: -16%;
-    width: 55%;
+    right: 0;
+
+    width: 42%;
     height: 100%;
 
     background:
         linear-gradient(
             135deg,
             transparent 0%,
-            transparent 46%,
-            var(--navy) 47%,
-            var(--navy) 100%
+            transparent 47%,
+            var(--navy-900) 48%,
+            var(--navy-900) 100%
         );
 
-    opacity: 0.95;
+    pointer-events: none;
 }
 
 
-/*
-    細い赤のハイライト
-*/
-
-.top-header::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.0),
-            rgba(255,255,255,0.28),
-            rgba(255,255,255,0.0)
-        );
-}
-
-
-/*
-    ヘッダー内部
-*/
+/* =========================================================
+   HEADER INNER
+   ========================================================= */
 
 .header-inner {
+
     position: relative;
 
     width: 100%;
     height: var(--header-height);
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -186,12 +227,14 @@ body {
 }
 
 
-/*
-    中央のアクセント
-    文字は使用しない
-*/
+/* =========================================================
+   HEADER MARK
+   ========================================================= */
 
-.header-mark {
+.header-emblem {
+
+    position: relative;
+
     width: 42px;
     height: 42px;
 
@@ -199,54 +242,49 @@ body {
 
     border:
         2px solid
-        rgba(255,255,255,0.82);
-
-    position: relative;
+        rgba(255,255,255,0.88);
 
     box-shadow:
-        0 0 0 5px rgba(255,255,255,0.06),
-        0 5px 18px rgba(0,0,0,0.20);
+        0 0 0 5px rgba(255,255,255,0.055),
+        0 7px 20px rgba(0,0,0,0.18);
+
+    transform: rotate(-8deg);
 }
 
 
-/*
-    マーク内部
-*/
+.header-emblem::before {
 
-.header-mark::before {
     content: "";
 
     position: absolute;
 
-    top: 8px;
-    left: 8px;
-
-    width: 20px;
-    height: 20px;
+    inset: 7px;
 
     border-radius: 50%;
 
-    background: var(--navy);
+    background: var(--navy-900);
 
-    box-shadow:
-        inset 0 0 0 2px rgba(255,255,255,0.18);
+    border:
+        1px solid
+        rgba(255,255,255,0.16);
 }
 
 
-.header-mark::after {
+.header-emblem::after {
+
     content: "";
 
     position: absolute;
-
-    left: 17px;
-    top: 5px;
 
     width: 5px;
     height: 30px;
 
-    border-radius: 4px;
+    left: 17px;
+    top: 4px;
 
-    background: var(--phillies-red);
+    border-radius: 99px;
+
+    background: var(--red);
 
     transform: rotate(45deg);
 }
@@ -257,127 +295,45 @@ body {
    ========================================================= */
 
 main {
+
     width: 100%;
+    min-height: 100dvh;
 
     padding-top:
         calc(
-            var(--header-height) +
-            env(safe-area-inset-top)
+            var(--header-height)
+            + var(--safe-top)
         );
 
     padding-bottom:
         calc(
-            var(--bottom-height) +
-            env(safe-area-inset-bottom) +
-            24px
+            var(--nav-height)
+            + var(--safe-bottom)
         );
-
-    min-height: 100dvh;
 }
 
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
 
 /*
-    V1確認用コンテンツ
+   HOMEページのコンテンツはここから追加する。
+
+   現在はUIのみのため空。
 */
 
-.hero {
-    padding: 28px 20px 10px;
-}
 
-.hero-label {
-    margin: 0 0 8px;
+.home-content {
 
-    font-size: 11px;
-    font-weight: 800;
-
-    letter-spacing: 0.18em;
-
-    color: var(--phillies-red);
-}
-
-.hero-title {
-    margin: 0;
-
-    font-size: 30px;
-    line-height: 1.05;
-    font-weight: 900;
-
-    letter-spacing: -0.04em;
-}
-
-.hero-subtitle {
-    margin: 10px 0 0;
-
-    color: var(--text-soft);
-
-    font-size: 13px;
-    line-height: 1.6;
-}
-
-
-/*
-    サンプルカード
-*/
-
-.demo-card {
-    margin: 18px 16px 0;
-
-    padding: 20px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,0.075),
-            rgba(255,255,255,0.025)
-        );
-
-    border: 1px solid var(--border);
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,0.18);
-}
-
-.demo-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.demo-card-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    color: var(--text-soft);
-}
-
-.demo-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: var(--phillies-red);
-
-    box-shadow:
-        0 0 12px rgba(232,24,40,0.65);
-}
-
-.demo-card h2 {
-    margin: 16px 0 6px;
-
-    font-size: 22px;
-    font-weight: 850;
-}
-
-.demo-card p {
-    margin: 0;
-
-    color: var(--text-soft);
-
-    font-size: 13px;
-    line-height: 1.6;
+    width: 100%;
+    min-height: calc(
+        100dvh
+        - var(--header-height)
+        - var(--nav-height)
+        - var(--safe-top)
+        - var(--safe-bottom)
+    );
 }
 
 
@@ -386,6 +342,7 @@ main {
    ========================================================= */
 
 .bottom-nav {
+
     position: fixed;
 
     left: 0;
@@ -394,34 +351,41 @@ main {
 
     height:
         calc(
-            var(--bottom-height) +
-            env(safe-area-inset-bottom)
+            var(--nav-height)
+            + var(--safe-bottom)
         );
 
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: var(--safe-bottom);
 
-    z-index: 1100;
+    z-index: 2000;
 
     background:
-        rgba(5,17,39,0.96);
+        rgba(4,13,29,0.95);
 
     border-top:
         1px solid
-        rgba(255,255,255,0.07);
+        var(--line);
 
     box-shadow:
-        0 -10px 30px rgba(0,0,0,0.24);
+        0 -10px 30px
+        rgba(0,0,0,0.30);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
 }
 
 
-.nav-inner {
+/* =========================================================
+   NAV INNER
+   ========================================================= */
+
+.bottom-nav-inner {
+
     width: 100%;
-    height: var(--bottom-height);
+    height: var(--nav-height);
 
     display: grid;
+
     grid-template-columns:
         repeat(5, 1fr);
 
@@ -434,9 +398,11 @@ main {
    ========================================================= */
 
 .nav-item {
+
     position: relative;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
@@ -446,48 +412,59 @@ main {
 
     min-width: 0;
 
-    color: #71809a;
+    color: #71809A;
 
     text-decoration: none;
 
     transition:
-        color 0.18s ease,
-        transform 0.18s ease;
+        color .18s ease,
+        transform .18s ease;
 }
 
 
 .nav-item:active {
-    transform: scale(0.94);
+
+    transform: scale(.92);
 }
 
 
+/* =========================================================
+   NAV ICON
+   ========================================================= */
+
 .nav-icon {
+
     width: 21px;
     height: 21px;
+
+    fill: none;
 
     stroke: currentColor;
 
     stroke-width: 1.9;
 
-    fill: none;
-
     stroke-linecap: round;
     stroke-linejoin: round;
 
     transition:
-        transform 0.18s ease,
-        filter 0.18s ease;
+        transform .18s ease,
+        filter .18s ease;
 }
 
 
+/* =========================================================
+   NAV LABEL
+   ========================================================= */
+
 .nav-label {
-    font-size: 8.5px;
+
+    font-size: 8px;
 
     line-height: 1;
 
-    font-weight: 800;
+    font-weight: 850;
 
-    letter-spacing: 0.06em;
+    letter-spacing: .065em;
 
     white-space: nowrap;
 }
@@ -498,122 +475,189 @@ main {
    ========================================================= */
 
 .nav-item.active {
-    color: var(--phillies-red);
+
+    color: var(--red);
 }
 
 
 .nav-item.active .nav-icon {
+
     transform: translateY(-1px);
 
     filter:
         drop-shadow(
             0 0 7px
-            rgba(232,24,40,0.45)
+            rgba(232,24,40,0.48)
         );
 }
 
 
 .nav-item.active::after {
+
     content: "";
 
     position: absolute;
 
     left: 50%;
-    bottom: 4px;
+    bottom: 5px;
 
     width: 22px;
     height: 3px;
 
+    transform:
+        translateX(-50%);
+
     border-radius: 99px;
 
-    background: var(--phillies-red);
-
-    transform: translateX(-50%);
+    background: var(--red);
 
     box-shadow:
-        0 0 9px
+        0 0 10px
         rgba(232,24,40,0.55);
 }
 
 
 /* =========================================================
-   HOME SPECIAL
+   HOME
    ========================================================= */
 
-.nav-item.home-item .nav-icon-wrap {
-    width: 38px;
-    height: 38px;
+.nav-home {
 
-    margin-top: -8px;
+    justify-content: center;
+}
+
+
+.nav-home .home-circle {
+
+    position: relative;
+
+    width: 42px;
+    height: 42px;
+
+    margin-top: -9px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     border-radius: 50%;
 
+    color: white;
+
     background:
         linear-gradient(
             145deg,
-            #e81828,
-            #b90f1d
+            var(--red-light),
+            var(--red-dark)
         );
 
-    color: white;
-
     border:
-        3px solid var(--navy);
+        3px solid
+        var(--navy-900);
 
     box-shadow:
-        0 4px 14px rgba(232,24,40,0.30);
+        0 5px 18px
+        rgba(232,24,40,0.34),
+
+        0 0 0 1px
+        rgba(232,24,40,0.20);
 }
 
 
-.nav-item.home-item .nav-icon {
+.nav-home .home-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(232,24,40,0.22);
+}
+
+
+.nav-home .nav-icon {
+
     width: 20px;
     height: 20px;
 
-    stroke-width: 2.2;
+    stroke-width: 2.15;
 }
 
 
-.nav-item.home-item.active .nav-icon-wrap {
-    box-shadow:
-        0 0 0 3px rgba(232,24,40,0.12),
-        0 5px 18px rgba(232,24,40,0.40);
+.nav-home.active {
+
+    color: white;
 }
 
 
-.nav-item.home-item.active::after {
+.nav-home.active::after {
+
     display: none;
 }
 
 
-.nav-item.home-item .nav-label {
-    margin-top: -1px;
+.nav-home.active .home-circle {
+
+    box-shadow:
+        0 0 0 4px
+        rgba(232,24,40,0.10),
+
+        0 7px 22px
+        rgba(232,24,40,0.46);
 }
 
 
 /* =========================================================
-   MOBILE ONLY
+   SMALL iPHONE
    ========================================================= */
 
-@media (min-width: 700px) {
-    body {
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
+@media (max-width: 360px) {
+
+    :root {
+
+        --header-height: 68px;
+        --nav-height: 72px;
     }
 
-    .top-header,
-    .bottom-nav {
-        width: 100%;
-        max-width: 480px;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+    .nav-label {
+
+        font-size: 7.5px;
+    }
+
+    .nav-icon {
+
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-home .home-circle {
+
+        width: 39px;
+        height: 39px;
     }
 }
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        transition: none !important;
+    }
+}
+
 </style>
 </head>
 
@@ -622,14 +666,22 @@ main {
 
 <div class="app">
 
+
     <!-- =====================================================
          HEADER
          ====================================================== -->
 
-    <header class="top-header">
+    <header class="site-header">
+
         <div class="header-inner">
-            <div class="header-mark" aria-hidden="true"></div>
+
+            <div
+                class="header-emblem"
+                aria-hidden="true"
+            ></div>
+
         </div>
+
     </header>
 
 
@@ -639,38 +691,9 @@ main {
 
     <main>
 
-        <section class="hero">
-            <p class="hero-label">PHILLIES BASEBALL</p>
-
-            <h1 class="hero-title">
-                Welcome to<br>
-                Philly.
-            </h1>
-
-            <p class="hero-subtitle">
-                ここに各ページのコンテンツが入ります。
-            </p>
-        </section>
-
-
-        <section class="demo-card">
-
-            <div class="demo-card-top">
-                <span class="demo-card-label">
-                    UI PREVIEW
-                </span>
-
-                <span class="demo-dot"></span>
-            </div>
-
-            <h2>Philly</h2>
-
-            <p>
-                現在は共通UIのプレビューです。
-                今後ここに実際の試合・選手・成績などを追加します。
-            </p>
-
-        </section>
+        <div class="home-content">
+            <!-- HOME CONTENT -->
+        </div>
 
     </main>
 
@@ -679,15 +702,19 @@ main {
          BOTTOM NAVIGATION
          ====================================================== -->
 
-    <nav class="bottom-nav" aria-label="Main navigation">
+    <nav
+        class="bottom-nav"
+        aria-label="Main navigation"
+    >
 
-        <div class="nav-inner">
+        <div class="bottom-nav-inner">
+
 
             <!-- SCHEDULE -->
 
             <a
-                href="schedule.html"
                 class="nav-item"
+                href="schedule.html"
             >
 
                 <svg
@@ -695,26 +722,28 @@ main {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                 >
+
                     <rect
                         x="3"
                         y="5"
                         width="18"
                         height="16"
                         rx="3"
-                    ></rect>
+                    />
 
-                    <path d="M7 3v4"></path>
-                    <path d="M17 3v4"></path>
+                    <path d="M7 3v4" />
+                    <path d="M17 3v4" />
 
-                    <path d="M3 10h18"></path>
+                    <path d="M3 10h18" />
 
-                    <path d="M8 14h.01"></path>
-                    <path d="M12 14h.01"></path>
-                    <path d="M16 14h.01"></path>
+                    <path d="M8 14h.01" />
+                    <path d="M12 14h.01" />
+                    <path d="M16 14h.01" />
 
-                    <path d="M8 18h.01"></path>
-                    <path d="M12 18h.01"></path>
-                    <path d="M16 18h.01"></path>
+                    <path d="M8 18h.01" />
+                    <path d="M12 18h.01" />
+                    <path d="M16 18h.01" />
+
                 </svg>
 
                 <span class="nav-label">
@@ -727,8 +756,8 @@ main {
             <!-- SCORE -->
 
             <a
-                href="score.html"
                 class="nav-item"
+                href="score.html"
             >
 
                 <svg
@@ -736,22 +765,24 @@ main {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                 >
+
                     <rect
                         x="3"
                         y="5"
                         width="18"
                         height="14"
                         rx="2"
-                    ></rect>
+                    />
 
-                    <path d="M7 9h4"></path>
-                    <path d="M13 9h4"></path>
+                    <path d="M7 9h4" />
+                    <path d="M13 9h4" />
 
-                    <path d="M7 13h2"></path>
-                    <path d="M11 13h2"></path>
-                    <path d="M15 13h2"></path>
+                    <path d="M7 13h2" />
+                    <path d="M11 13h2" />
+                    <path d="M15 13h2" />
 
-                    <path d="M7 16h10"></path>
+                    <path d="M7 16h10" />
+
                 </svg>
 
                 <span class="nav-label">
@@ -764,20 +795,25 @@ main {
             <!-- HOME -->
 
             <a
-                href="index.html"
-                class="nav-item home-item active"
+                class="nav-item nav-home active"
+                href="home.html"
+                aria-current="page"
             >
 
-                <span class="nav-icon-wrap">
+                <span class="home-circle">
 
                     <svg
                         class="nav-icon"
                         viewBox="0 0 24 24"
                         aria-hidden="true"
                     >
-                        <path d="M3 11.5 12 4l9 7.5"></path>
-                        <path d="M5 10.5V20h14v-9.5"></path>
-                        <path d="M9 20v-5h6v5"></path>
+
+                        <path d="M3 11.5 12 4l9 7.5" />
+
+                        <path d="M5 10.5V20h14v-9.5" />
+
+                        <path d="M9 20v-5h6v5" />
+
                     </svg>
 
                 </span>
@@ -792,8 +828,8 @@ main {
             <!-- PLAYER -->
 
             <a
-                href="player.html"
                 class="nav-item"
+                href="player.html"
             >
 
                 <svg
@@ -801,19 +837,17 @@ main {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                 >
+
                     <circle
                         cx="12"
                         cy="8"
                         r="3.5"
-                    ></circle>
+                    />
 
                     <path
                         d="M5 20c.7-4 3-6 7-6s6.3 2 7 6"
-                    ></path>
+                    />
 
-                    <path
-                        d="M8 17.5h8"
-                    ></path>
                 </svg>
 
                 <span class="nav-label">
@@ -826,8 +860,8 @@ main {
             <!-- STATS -->
 
             <a
-                href="stats.html"
                 class="nav-item"
+                href="stats.html"
             >
 
                 <svg
@@ -835,10 +869,12 @@ main {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                 >
-                    <path d="M4 20V10"></path>
-                    <path d="M10 20V4"></path>
-                    <path d="M16 20v-7"></path>
-                    <path d="M22 20V7"></path>
+
+                    <path d="M4 20V10" />
+                    <path d="M10 20V4" />
+                    <path d="M16 20v-7" />
+                    <path d="M22 20V7" />
+
                 </svg>
 
                 <span class="nav-label">
@@ -847,9 +883,11 @@ main {
 
             </a>
 
+
         </div>
 
     </nav>
+
 
 </div>
 
